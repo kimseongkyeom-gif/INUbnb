@@ -16,6 +16,7 @@ django-seed = "*"
 django-dotenv = "*"
 requests = "*"
 pathspec = "==0.3.0"
+pipenv-to-requirements = "*"
 
 [requires]
 python_version = "3.7"

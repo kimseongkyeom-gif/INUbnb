@@ -1,7 +1,10 @@
+from django.utils import timezone
 from django.db import models
 from django.urls import reverse
 from django_countries.fields import CountryField
 from core import models as core_models
+from calen import Calendar
+import random
 
 
 class AbstractItem(core_models.TimeStampedModel):
@@ -61,8 +64,12 @@ class Photo(core_models.TimeStampedModel):
     def __str__(self):
         return self.caption
 
+    def get_absolute_url(self):
+        return reverse("rooms:photos", kwargs={"pk": self.room.pk})
+
 
 class Room(core_models.TimeStampedModel):
+
     """ Room Model Definition """
 
     name = models.CharField(max_length=140)
@@ -88,12 +95,12 @@ class Room(core_models.TimeStampedModel):
     facilities = models.ManyToManyField("Facility", related_name="rooms", blank=True)
     house_rules = models.ManyToManyField("HouseRule", related_name="rooms", blank=True)
 
+    def __str__(self):
+        return self.name
+
     def save(self, *args, **kwargs):
         self.city = str.capitalize(self.city)
         super().save(*args, **kwargs)
-
-    def __str__(self):
-        return self.name
 
     def get_absolute_url(self):
         return reverse("rooms:detail", kwargs={"pk": self.pk})
@@ -104,5 +111,33 @@ class Room(core_models.TimeStampedModel):
         if len(all_reviews) > 0:
             for review in all_reviews:
                 all_ratings += review.rating_average()
-            return round(all_ratings / len(all_reviews))
+            return round(all_ratings / len(all_reviews), 2)
         return 0
+
+    def first_photo(self):
+        try:
+            (photo,) = self.photos.all()[:1]
+            return photo.file.url
+        except ValueError:
+            return None
+
+    def get_next_four_photos(self):
+        photos = self.photos.all()[1:5]
+        return photos
+
+    def get_calendars(self):
+        now = timezone.now()
+        this_year = now.year
+        this_month = now.month
+        next_month = this_month + 1
+        if this_month == 12:
+            next_month = 1
+        this_month_cal = Calendar(this_year, this_month)
+        next_month_cal = Calendar(this_year, next_month)
+        return [this_month_cal, next_month_cal]
+
+    def get_four_amenities(self):
+        amenities = list(self.amenities.all())
+        # random.shuffle(amenities)
+        random.shuffle(amenities)
+        return amenities[:4]

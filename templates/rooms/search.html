@@ -1,8 +1,8 @@
 {% extends "base.html" %}
-
+{% load i18n %}
 {% block page_title %}
 
-Search
+{% trans "Search" %}
 
 {% endblock page_title %}
 
@@ -11,18 +11,57 @@ Search
 
 {% block content %}
 
-<h2>Search!</h2>
+<div class="flex flex-col md:flex-row">
+    <div class="w-full md:w-1/3 md:border-r md:pr-4">
+        <p class="text-lg font-semibold mb-6">검색</p>
+        <form method="get" action="{% url 'rooms:search' %}" class="">
+            {{form.as_p}}
+            <button class="btn text-base bg-indigo-500 text-white mt-10">Search</button>
+        </form>
+    </div>
 
-<form method="get" action="{% url "rooms:search" %}">
-    {{form.as_p}}
-    <button>Search</button>
-</form>
+    <div class="w-full mt-20 md:mt-0 md:w-2/3 md:ml-4">
+        <p class="text-lg font-semibold mb-6">검색 결과</p>
+        <div class="">
+            {% for room in rooms %}
+            {% include "mixins/room_search.html" with room=room %}
+            {% endfor %}
+        </div>
 
-<h3>Results</h3>
+        <div class="flex flex-col items-center mb-10">
+            <div class="">
+                {% if rooms.has_previous %}
+                <a href="?{{query_string}}&page={{rooms.previous_page_number}}">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                {% endif %}
 
-{% for room in rooms %}
-<h3>{{room.name}}</h3>
-{% endfor %}
+                {% if rooms %}
+                <span class="font-medium">
+                    Page {{rooms.number}} of {{rooms.paginator.num_pages}}
+                </span>
+                {% endif %}
 
+                {% if rooms.has_next %}
+                <a href="?{{query_string}}&page={{rooms.next_page_number}}">
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                {% endif %}
+            </div>
+
+            <div class="flex">
+                {% for page in rooms.paginator.page_range %}
+                <a class="font-medium
+              {% if not forloop.last %}
+                mr-1
+              {% endif %}
+              " href="?{{query_string}}&page={{page}}">{{page}}</a>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
 
 {% endblock content %}

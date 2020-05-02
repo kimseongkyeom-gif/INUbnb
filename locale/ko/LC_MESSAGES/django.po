@@ -1,0 +1,262 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-24 23:24+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: .\templates\base.html:26
+msgid "Search By City"
+msgstr "원하는 도시를 검색해보세요"
+
+#: .\templates\lists\list_detail.html:10
+msgid "Your Favourites"
+msgstr "나의 룸리스트"
+
+#: .\templates\mixins\room_card.html:11
+msgid "Superhost"
+msgstr "슈퍼호스트"
+
+#: .\templates\partials\footer.html:5
+msgid "Please don't copy us."
+msgstr ""
+
+#: .\templates\partials\footer.html:7
+msgid "All rights reserved"
+msgstr ""
+
+#: .\templates\partials\nav.html:7
+msgid "Stop hosting"
+msgstr "호스팅 그만하기"
+
+#: .\templates\partials\nav.html:9
+msgid "Start hosting"
+msgstr "호스팅 시작하기"
+
+#: .\templates\partials\nav.html:14 .\templates\rooms\room_create.html:5
+msgid "Create Room"
+msgstr "방 생성"
+
+#: .\templates\partials\nav.html:16
+msgid "Reservations"
+msgstr "예약 리스트"
+
+#: .\templates\partials\nav.html:17
+msgid "Favorites"
+msgstr "나의 룸리스트"
+
+#: .\templates\partials\nav.html:19
+msgid "Profile"
+msgstr "프로필"
+
+#: .\templates\partials\nav.html:20
+msgid "Log out"
+msgstr "로그아웃"
+
+#: .\templates\partials\nav.html:22 .\templates\users\signup.html:19
+msgid "Log in"
+msgstr "로그인"
+
+#: .\templates\partials\nav.html:23 .\templates\users\login.html:19
+msgid "Sign up"
+msgstr "회원가입"
+
+#: .\templates\partials\social_login.html:5
+msgid "Continue with Kakao"
+msgstr "카카오로 로그인"
+
+#: .\templates\reservations\detail.html:4
+msgid "Reservation"
+msgstr "예약"
+
+#: .\templates\reservations\detail.html:33
+msgid "Contact your Inubnb Host"
+msgstr ""
+
+#: .\templates\reservations\detail.html:35
+msgid "Send a Message"
+msgstr "메시지 보내기"
+
+#: .\templates\reservations\detail.html:42
+msgid "Write your review"
+msgstr "리뷰를 남겨주세요."
+
+#: .\templates\reservations\detail.html:46
+msgid "Submit Review"
+msgstr "리뷰 남기기"
+
+#: .\templates\rooms\photo_create.html:5
+msgid "Upload photo"
+msgstr "사진 업로드"
+
+#: .\templates\rooms\photo_edit.html:5
+msgid "Update photo"
+msgstr "사진 업데이트"
+
+#: .\templates\rooms\room_detail.html:29
+msgid "Remove from Favourites"
+msgstr "리스트에서 삭제하기"
+
+#: .\templates\rooms\room_detail.html:32
+msgid "Save to Favourites"
+msgstr "리스트에 저장하기"
+
+#: .\templates\rooms\room_detail.html:52
+msgid "Amenities"
+msgstr "편의시설"
+
+#: .\templates\rooms\room_detail.html:58
+msgid "Facilities"
+msgstr "시설"
+
+#: .\templates\rooms\room_detail.html:64
+msgid "House Rules"
+msgstr "룸 규칙"
+
+#: .\templates\rooms\room_detail.html:70
+msgid "Reviews"
+msgstr "리뷰 남기기"
+
+#: .\templates\rooms\room_detail.html:102
+msgid "Edit Room"
+msgstr "룸 편집"
+
+#: .\templates\rooms\room_edit.html:5
+msgid "Update Room"
+msgstr "룸 생성"
+
+#: .\templates\rooms\room_edit.html:17
+msgid "Edit Photos"
+msgstr "사진 편집"
+
+#: .\templates\rooms\room_list.html:27
+#, python-format
+msgid ""
+"Page\n"
+"            %(current_page)s of %(total_pages)s"
+msgstr ""
+
+#: .\templates\rooms\room_photos.html:4
+msgid "'s Photos"
+msgstr "의 사진들"
+
+#: .\templates\rooms\room_photos.html:14
+msgid "Upload Photo"
+msgstr "사진 업로드"
+
+#: .\templates\rooms\room_photos.html:23
+msgid "Edit"
+msgstr "편집"
+
+#: .\templates\rooms\room_photos.html:25
+msgid "Delete"
+msgstr "삭제"
+
+#: .\templates\rooms\room_photos.html:31
+msgid "Back to edit room"
+msgstr "편집창으로 돌아가기"
+
+#: .\templates\rooms\search.html:5
+msgid "Search"
+msgstr "검색"
+
+#: .\templates\rooms\search.html:14
+msgid "Search!"
+msgstr "검색"
+
+#: .\templates\rooms\search.html:21
+msgid "Results"
+msgstr "검색결과"
+
+#: .\templates\users\login.html:5
+msgid "Log In"
+msgstr "로그인"
+
+#: .\templates\users\login.html:18
+msgid "Don't have an account?"
+msgstr "계정을 가지고 있지 않으신가요?"
+
+#: .\templates\users\signup.html:5
+msgid "Sign Up"
+msgstr "회원가입"
+
+#: .\templates\users\signup.html:18
+msgid "Have an account?"
+msgstr "계정을 가지고 계신가요?"
+
+#: .\templates\users\update-password.html:5
+msgid "Update Password"
+msgstr "비밀번호 업데이트"
+
+#: .\templates\users\update-profile.html:5
+msgid "Update Profile"
+msgstr "프로필"
+
+#: .\templates\users\update-profile.html:19
+msgid "Change Password"
+msgstr "비밀번호 변경"
+
+#: .\templates\users\user_detail.html:5
+msgid "'s Profile"
+msgstr "님의 프로필"
+
+#: .\templates\users\user_detail.html:29
+msgid "Edit Profile"
+msgstr "프로필 편집"
+
+#: .\templates\users\user_detail.html:33
+msgid "'s Rooms"
+msgstr "님의 집"
+
+#: .\users\models.py:22
+msgid "Male"
+msgstr "남성"
+
+#: .\users\models.py:23
+msgid "Female"
+msgstr "여성"
+
+#: .\users\models.py:24
+msgid "Other"
+msgstr "Other"
+
+#: .\users\models.py:31
+msgid "English"
+msgstr "영어"
+
+#: .\users\models.py:32
+msgid "Korean"
+msgstr "한국어"
+
+#: .\users\models.py:50
+msgid "first name"
+msgstr ""
+
+#: .\users\models.py:53
+msgid "gender"
+msgstr "성별"
+
+#: .\users\models.py:55
+msgid "bio"
+msgstr "정보"
+
+#: .\users\models.py:58
+msgid "language"
+msgstr "언어"
+
+#: .\users\models.py:86
+msgid "Verify INUBNB Account"
+msgstr "INUBNB 계정을 확인해주세요."

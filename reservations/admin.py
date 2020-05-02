@@ -17,3 +17,10 @@ class ReservationAdmin(admin.ModelAdmin):
         "is_finished",
     )
     list_filter = ("status",)
+
+    search_fields = ("status",)
+
+
+@admin.register(models.BookedDay)
+class BookedDayAdmin(admin.ModelAdmin):
+    list_display = ("day", "reservation")

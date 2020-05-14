@@ -1,18 +1,12 @@
 from django import forms
-from django.contrib.auth import password_validation
 from . import models
 
 
 class LoginForm(forms.Form):
-    """ LoginForm Definition """
 
-    error_messages = {
-        "password_mismatch": "비밀번호가 일치하지 않습니다.",
-        "user_does_not_exist": "존재하지 않는 이메일입니다.",
-    }
-    email = forms.EmailField(widget=forms.EmailInput(attrs={"placeholder": "이메일"}))
+    email = forms.EmailField(widget=forms.EmailInput(attrs={"placeholder": "Email"}))
     password = forms.CharField(
-        widget=forms.PasswordInput(attrs={"placeholder": "비밀번호"})
+        widget=forms.PasswordInput(attrs={"placeholder": "Password"})
     )
 
     def clean(self):
@@ -23,95 +17,50 @@ class LoginForm(forms.Form):
             if user.check_password(password):
                 return self.cleaned_data
             else:
-                self.add_error(
-                    "password",
-                    forms.ValidationError(
-                        self.error_messages["password_mismatch"],
-                        code="password_mismatch",
-                    ),
-                )
+                self.add_error("password", forms.ValidationError("Password is wrong"))
         except models.User.DoesNotExist:
-            self.add_error(
-                "email",
-                forms.ValidationError(
-                    self.error_messages["user_does_not_exist"],
-                    code="user_does_not_exist",
-                ),
-            )
+            self.add_error("email", forms.ValidationError("User does not exist"))
 
 
 class SignUpForm(forms.ModelForm):
-
-    """ SignupForm Definition """
-
-    error_messages = {
-        "password_mismatch": "비밀번호가 일치하지 않습니다.",
-        "existing_user": "이미 존재하는 이메일입니다.",
-    }
-
     class Meta:
         model = models.User
         fields = ("first_name", "last_name", "email")
         widgets = {
-            "first_name": forms.TextInput(attrs={"placeholder": "이름"}),
-            "last_name": forms.TextInput(attrs={"placeholder": "성"}),
-            "email": forms.EmailInput(attrs={"placeholder": "이메일"}),
+            "first_name": forms.TextInput(attrs={"placeholder": "First Name"}),
+            "last_name": forms.TextInput(attrs={"placeholder": "Last Name"}),
+            "email": forms.EmailInput(attrs={"placeholder": "Email Name"}),
         }
 
-    password1 = forms.CharField(
-        label="비밀번호", widget=forms.PasswordInput(attrs={"placeholder": "비밀번호"})
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={"placeholder": "Password"})
     )
-    password2 = forms.CharField(
-        label="비밀번호 확인", widget=forms.PasswordInput(attrs={"placeholder": "비밀번호 확인"})
+    password1 = forms.CharField(
+        widget=forms.PasswordInput(attrs={"placeholder": "Confirm Password"})
     )
 
     def clean_email(self):
         email = self.cleaned_data.get("email")
         try:
             models.User.objects.get(email=email)
-            self.add_error(
-                "email",
-                forms.ValidationError(
-                    self.error_messages["existing_user"], code="existing_user"
-                ),
+            raise forms.ValidationError(
+                "That email is already taken", code="existing_user"
             )
         except models.User.DoesNotExist:
             return email
 
-    def clean_password2(self):
+    def clean_password1(self):
+        password = self.cleaned_data.get("password")
         password1 = self.cleaned_data.get("password1")
-        password2 = self.cleaned_data.get("password2")
-        if password1 and password2 and password1 != password2:
-            self.add_error(
-                "password2",
-                forms.ValidationError(
-                    self.error_messages["password_mismatch"], code="password_mismatch",
-                ),
-            )
-            self.add_error(
-                "password1", forms.ValidationError(""),
-            )
-        return password2
+        if password != password1:
+            raise forms.ValidationError("Password confirmation does not match")
+        else:
+            return password
 
-    def _post_clean(self):
-        super()._post_clean()
-        # Validate the password after self.instance is updated with form data
-        # by super().
-        password = self.cleaned_data.get("password2")
-        if password:
-            try:
-                password_validation.validate_password(password, self.instance)
-            except forms.ValidationError as error:
-                self.add_error("password1", "")
-                self.add_error("password2", error)
-
-    def save(self, commit=True):
-        # 바꿔치기
+    def save(self, *args, **kwargs):
         user = super().save(commit=False)
         email = self.cleaned_data.get("email")
-        password1 = self.cleaned_data.get("password1")
+        password = self.cleaned_data.get("password")
         user.username = email
-        user.set_password(password1)
-        if commit:
-            user.save()
-        return user
+        user.set_password(password)
+        user.save()
